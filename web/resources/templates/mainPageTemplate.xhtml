@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,43 +15,45 @@
     </h:head>
 
     <h:body>
-        <h:form>
-        <p:layout fullPage="true">
+        <h:form id="myForm">
+            <b:navBar id="mainmenu" brand="" brandHref="/MEET/faces/index.xhtml" brandImg="/MEET/resources/images/Meet.png" fixed="true">
+                <b:column  medium-screen="4" style="padding-top: 5px; align-items: center; justify-content: center;">
+                    <b:navbarLinks>
+                        <b:inputText >
+                            <f:facet name="append">
+                                <b:button value="" icon="search"/>
+                            </f:facet>
+                        </b:inputText>
+                    </b:navbarLinks> 
+                </b:column>
+                <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
 
-            <p:layoutUnit position="north"  closable="true" collapsible="true">
-                <div id="top" class="top">
-                    <ui:insert name="top">
-                        <h:graphicImage library="images" name="Meet.png"/>                       
-                    </ui:insert>
-                </div>
-            </p:layoutUnit>
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                <b:navbarLinks pull="right" rendered="#{!loginBean.isLoggedIn}">
+                    <b:navLink value="Log in" href="/MEET/faces/login.xhtml" icon="glyphicon-user"/>
+                    <b:navLink value="Register" rendered="#{!loginBean.isLoggedIn}" href="/MEET/faces/register.xhtml" icon="glyphicon-pencil"/>                            
 
-            <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                Footer
-            </p:layoutUnit>
 
-            <p:layoutUnit position="west" header="Menu" collapsible="true">
-                <p:menu>
-                    <p:submenu label="Actions">
-                        <p:menuitem value="Register" outcome="register"/>
-                        <p:menuitem value="Log in" outcome="login"/>
-                        <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                        <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                        <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+                </b:navbarLinks>
+                <b:navbarLinks pull="right" rendered="#{loginBean.isLoggedIn}">
+                    <b:navLink value="Log out" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()"/>
+                    <b:navLink value="Account" href="/MEET/faces/account.xhtml" icon="user" />
+                </b:navbarLinks>
 
-                    </p:submenu>
+            </b:navBar>
 
-                </p:menu>
-            </p:layoutUnit>
+            Hello #{loginBean.username}<br/>
+            #{loginBean.isLoggedIn}<br/>
 
-            <p:layoutUnit position="center">
-                <ui:insert name="content">
-                    Content
-                </ui:insert>
-            </p:layoutUnit>
 
-        </p:layout>
-            </h:form>
+            <ui:insert name="content">
+
+            </ui:insert>              
+
+
+            <p:commandButton id="hiddenButton" value="Logout" ajax="true" action="#{loginBean.logout}" style="display: none;"/>
+
+        </h:form>
     </h:body>
 
 </html>
