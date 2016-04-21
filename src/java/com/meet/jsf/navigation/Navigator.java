@@ -5,11 +5,11 @@
  */
 package com.meet.jsf.navigation;
 
+
 /**
  *
  * @author Piotr
  */
-
 public class Navigator {
     private Navigator(){}
     

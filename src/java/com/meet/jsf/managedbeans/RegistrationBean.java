@@ -5,8 +5,14 @@
  */
 package com.meet.jsf.managedbeans;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import com.meet.jsf.dbconnector.IDbConnector;
+import com.meet.jsf.dbconnector.MockDbConnector;
+import com.meet.jsf.navigation.Navigator;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -14,19 +20,22 @@ import javax.validation.constraints.Size;
  *
  * @author Piotr
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class RegistrationBean {
 
     @Pattern(regexp = "^\\w*$", message = "Login can contain only letters and numbers")
     @Size(min = 4, max = 16, message = "Login length must be in range from 4 to 16")
     private String login;
-    
+
     @Size(min = 4, max = 16, message = "Password length must be in range from 4 to 16")
     private String password;
-    
+
     @Pattern(regexp = "^.+@.+$", message = "Email should match pattern: user@domain")
     private String email;
+
+    @Inject
+    private MockDbConnector dbConnector;
 
     public String getLogin() {
         return login;
@@ -51,7 +60,16 @@ public class RegistrationBean {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String register(){
-        return "index";
+
+    public String register() {
+        if (dbConnector.registerUser()) {
+            return Navigator.toIndex();
+        }
+        FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_WARN,
+                        "User with this login already exists",
+                        "Please choose another login"));
+        return Navigator.toRegister();
     }
 }

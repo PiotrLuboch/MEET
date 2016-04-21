@@ -5,11 +5,20 @@
  */
 package com.meet.jsf.managedbeans;
 
+import com.meet.jsf.dbconnector.IDbConnector;
+import com.meet.jsf.dbconnector.MockDbConnector;
 import com.meet.jsf.navigation.Navigator;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.faces.bean.ManagedProperty;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -18,9 +27,9 @@ import javax.validation.constraints.Size;
  *
  * @author Piotr
  */
-@ManagedBean
+@Named
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable {
 
     @Pattern(regexp = "^\\w*$", message = "Login can contain only letters and numbers")
     @Size(min = 4, max = 16, message = "Login length must be in range from 4 to 16")
@@ -28,6 +37,9 @@ public class LoginBean {
     @Size(min = 4, max = 16, message = "Password length must be in range from 4 to 16")
     private String password;
     private boolean isLoggedIn = false;
+
+    @Inject
+    private MockDbConnector dbConnector;
 
     public String getPassword() {
         return password;
@@ -38,6 +50,11 @@ public class LoginBean {
     }
 
     public boolean isIsLoggedIn() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null && session.getAttribute("username") == null) {
+            isLoggedIn = false;
+        }
+
         return isLoggedIn;
     }
 
@@ -54,8 +71,23 @@ public class LoginBean {
     }
 
     public String login() {
-        if (username.equals("admin") && password.equals("admin")) {
+        dbConnector.connect();
+        if (dbConnector.validateUser()) {
             isLoggedIn = true;
+            ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+            HttpSession session = (HttpSession) context.getSession(false);
+            session.setAttribute("username", username);            
+            try {                
+                FacesContext.getCurrentInstance().addMessage(
+                        "myForm:indexMessages",
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                "Login successful",
+                                "Logged in as " + username));
+                context.getFlash().setKeepMessages(true);
+                context.redirect(context.getRequestContextPath() + "/faces/index.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
@@ -69,8 +101,20 @@ public class LoginBean {
 
     public String logout() {
         isLoggedIn = false;
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpSession session = (HttpSession) context.getSession(false);
         session.invalidate();
-        return Navigator.toLogin();
+        FacesContext.getCurrentInstance().addMessage(
+                "myForm:indexMessages",
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "You have logged out",
+                        "Have a nice meeting :)"));
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+        try {
+            context.redirect(context.getRequestContextPath() + "/faces/index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Navigator.toIndex();
     }
 }
