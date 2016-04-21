@@ -9,8 +9,6 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="default.css"/>
-        <h:outputStylesheet library="css" name="cssLayout.css"/>
         <title><ui:insert name="title">Page template</ui:insert></title>
     </h:head>
 
@@ -37,7 +35,6 @@
 
                 </b:navbarLinks>
                 <b:navbarLinks pull="right" rendered="#{loginBean.isLoggedIn}">
-                    <b:navLink value="Log out" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()"/>
                     <b:dropMenu value="#{loginBean.username}" icon="user" >                        
                         <b:navLink value="Account" href="/MEET/faces/account.xhtml"/>
                         <b:navLink value="Event management" href="/MEET/faces/userEvents.xhtml"/>
@@ -45,16 +42,14 @@
                         <b:navLink value="Log out" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()"/>
                     </b:dropMenu>
                 </b:navbarLinks>
-
-            </b:navBar>           
+            </b:navBar>     
+            
             <ui:insert name="content">
 
-            </ui:insert>              
-
-
-
+            </ui:insert> 
+            
              <p:commandButton id="hiddenButton" value="Logout" ajax="true" action="#{loginBean.logout}" style="display: none;"/>
-
+             <h:outputStylesheet library="css" name="growl.css"/>
         </h:form>
     </h:body>
 
