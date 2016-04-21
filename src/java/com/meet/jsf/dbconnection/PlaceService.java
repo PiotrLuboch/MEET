@@ -26,34 +26,29 @@ public class PlaceService {
 
         return placesList;
     }
-//   public static Place GetPlaceByID(int id) throws SQLException 
-//        {
-//            Connection conn = DbConnection.connect();
-//            
-//            String query = "CALL `GetPlaceById`(" + id + ");";            
-//            Statement st = conn.createStatement();
-//            ResultSet rs = st.executeQuery(query);
-//            
-//            Place place = null;
-//           
-//            while(rs.next())
-//            {
-//            place = new Place(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("LocationX"), rs.getString("LocationY"));
-//            }
-//            st.close();
-//            DbConnection.disconnect();
-//            
-//            return place;
-//        }
-//    public static void Save(Place place) throws SQLException
-//        {
-//            Connection conn = DbConnection.connect();
-//            String query = "CALL `SavePlace`('" + place.Description + "','" + place.LocationX + "','" + place.LocationY + "','" + place.Name + "');";
-//            Statement st = conn.createStatement();
-//            ResultSet rs = st.executeQuery(query); 
-//            
-//            st.close();
-//            DbConnection.disconnect();
-//        }
+
+    public static Place GetPlaceByID(int id) throws SQLException {
+
+        String query = "CALL `GetPlaceById`(" + id + ");";
+        Place place = null;
+
+        try (DbConnection db = new DbConnection()) {
+            ResultSet rs = db.executeQuery(query);
+
+            while (rs.next()) {
+                place = new Place(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), rs.getString("LocationX"), rs.getString("LocationY"));
+            }
+        }
+
+        return place;
+    }
+
+    public static void Save(Place place) throws SQLException {
+        String query = "CALL `SavePlace`('" + place.getDescription() + "','" + place.getLocationX() + "','" + place.getLocationY() + "','" + place.getName() + "');";
+
+        try (DbConnection db = new DbConnection()) {
+            ResultSet rs = db.executeQuery(query);
+        }
+    }
 
 }

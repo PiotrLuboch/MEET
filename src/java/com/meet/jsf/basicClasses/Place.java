@@ -7,11 +7,11 @@ import java.util.List;
 
 public class Place 
 {
-    public int ID ;
-    public String Name ;
-    public String Description ;
-    public String LocationX ;
-    public String LocationY ;
+    private int ID ;
+    private String Name ;
+    private String Description ;
+    private String LocationX ;
+    private String LocationY ;
 
     public int getID() {
         return ID;
@@ -61,15 +61,15 @@ public class Place
             this.LocationX = locX;
             this.LocationY = locY;
         }
-//     public Place(int placeID) throws SQLException
-//        {
-//            Place place = PlaceService.GetPlaceByID(placeID);
-//            this.ID = place.ID;
-//            this.Name = place.Name;
-//            this.Description = place.Description;
-//            this.LocationX = place.LocationX;
-//            this.LocationY = place.LocationY;
-//        }
+     public Place(int placeID) throws SQLException
+        {
+            Place place = PlaceService.GetPlaceByID(placeID);
+            this.ID = place.ID;
+            this.Name = place.Name;
+            this.Description = place.Description;
+            this.LocationX = place.LocationX;
+            this.LocationY = place.LocationY;
+        }
      
     @Override
      public String toString()
@@ -91,8 +91,8 @@ public class Place
             System.out.println(place.toString());
         }
 
-//Place nowe = new Place(0,"Olkusz","okolice rynku","2","3");
-
+//Place nowe = new Place(0,"Przemysl","okolice rynku","2","3");
+//
 //PlaceService.Save(nowe);
 
     }
