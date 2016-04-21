@@ -61,15 +61,15 @@ public class Place
             this.LocationX = locX;
             this.LocationY = locY;
         }
-     public Place(int placeID) throws SQLException
-        {
-            Place place = PlaceService.GetPlaceByID(placeID);
-            this.ID = place.ID;
-            this.Name = place.Name;
-            this.Description = place.Description;
-            this.LocationX = place.LocationX;
-            this.LocationY = place.LocationY;
-        }
+//     public Place(int placeID) throws SQLException
+//        {
+//            Place place = PlaceService.GetPlaceByID(placeID);
+//            this.ID = place.ID;
+//            this.Name = place.Name;
+//            this.Description = place.Description;
+//            this.LocationX = place.LocationX;
+//            this.LocationY = place.LocationY;
+//        }
      
     @Override
      public String toString()
