@@ -19,11 +19,12 @@
             <b:navBar id="mainmenu" brand="" brandHref="/MEET/faces/index.xhtml" brandImg="/MEET/resources/images/Meet.png" fixed="true">
                 <b:column  medium-screen="4" style="padding-top: 7px; align-items: center; justify-content: center;">
                     <b:navbarLinks>
-                        <b:inputText >
+                        <b:inputText id="search">
                             <f:facet name="append">
                                 <b:button value="" icon="search"/>
                             </f:facet>
                         </b:inputText>
+                        <p:watermark for="search" value="Search events..."/>
                     </b:navbarLinks> 
                 </b:column>
                 <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
@@ -41,7 +42,7 @@
                         <b:navLink value="Account" href="/MEET/faces/account.xhtml"/>
                         <b:navLink value="Event management" href="/MEET/faces/userEvents.xhtml"/>
                         <b:navLink/>
-                        <b:navLink value="Log out"/>
+                        <b:navLink value="Log out" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()"/>
                     </b:dropMenu>
                 </b:navbarLinks>
 
