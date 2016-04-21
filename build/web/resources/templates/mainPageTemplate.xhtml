@@ -15,7 +15,6 @@
     </h:head>
 
     <h:body>
-<<<<<<< HEAD
         <h:form id="myForm">           
             <b:navBar id="mainmenu" brand="" brandHref="/MEET/faces/index.xhtml" brandImg="/MEET/resources/images/Meet.png" fixed="true">
                 <b:column  medium-screen="4" style="padding-top: 7px; align-items: center; justify-content: center;">
@@ -48,57 +47,13 @@
                 </b:navbarLinks>
 
             </b:navBar>           
-=======
-        <h:form id="myForm">
-            <b:navBar id="mainmenu" brand="" brandHref="/MEET/faces/index.xhtml" brandImg="/MEET/resources/images/Meet.png" fixed="true">
-                <b:navbarLinks>                                                    
-                    <b:dropMenu value="Dropdown">
-                        <b:navLink value="Action" href="#"></b:navLink>
-                        <b:navLink value="Another action" href="#"></b:navLink>
-                        <b:navLink value="Something else here" href="#"></b:navLink>
-                        <b:navLink></b:navLink>
-                        <b:navLink header="Nav header"></b:navLink>
-                        <b:navLink value="Separated link" href="#"></b:navLink>
-                        <b:dropMenu value="Nested submenu">
-                            <b:navLink value="You can nest menus" href="#"></b:navLink>
-                            <b:dropMenu value="Nested sub-submenu">
-                                <b:navLink value="... as deep as ..." href="#"></b:navLink>
-                                <b:dropMenu value="Nested sub-sub-submenu">
-                                    <b:navLink value="... you want!" href="#"></b:navLink>
-                                </b:dropMenu>
-                            </b:dropMenu>
-
-                        </b:dropMenu>
-                        <b:navLink value="One more separated link" href="#"></b:navLink>
-                    </b:dropMenu>
-                </b:navbarLinks>                        
-                <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
-                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-                <b:navbarLinks id="rightside" pull="right" >
-                    <b:navLink value="Log in" rendered="#{!loginBean.isLoggedIn}" href="/MEET/faces/login.xhtml" icon="glyphicon-user"/>
-                    <b:navLink value="Register" rendered="#{!loginBean.isLoggedIn}" href="/MEET/faces/register.xhtml" icon="glyphicon-pencil"/>                            
-                    <b:navLink value="Log out" rendered="#{loginBean.isLoggedIn}" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()">
-
-                        <f:ajax render="rightside"/>                       
-                    </b:navLink>
-                </b:navbarLinks>
-            </b:navBar>
-
-            Hello #{loginBean.username}<br/>
-            #{loginBean.isLoggedIn}
-
->>>>>>> 1681fdae748a980611fd8b7fe5e51cde39d89517
-
             <ui:insert name="content">
 
             </ui:insert>              
 
 
-<<<<<<< HEAD
-            <p:commandButton id="hiddenButton" value="Logout" ajax="true" action="#{loginBean.logout}" style="display: none;"/>
-=======
+
              <p:commandButton id="hiddenButton" value="Logout" ajax="true" action="#{loginBean.logout}" style="display: none;"/>
->>>>>>> 1681fdae748a980611fd8b7fe5e51cde39d89517
 
         </h:form>
     </h:body>
