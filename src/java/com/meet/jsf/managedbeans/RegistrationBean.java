@@ -5,6 +5,7 @@
  */
 package com.meet.jsf.managedbeans;
 
+<<<<<<< HEAD
 import com.meet.jsf.dbconnector.IDbConnector;
 import com.meet.jsf.dbconnector.MockDbConnector;
 import com.meet.jsf.navigation.Navigator;
@@ -13,6 +14,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+=======
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+>>>>>>> 1681fdae748a980611fd8b7fe5e51cde39d89517
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -27,10 +32,17 @@ public class RegistrationBean {
     @Pattern(regexp = "^\\w*$", message = "Login can contain only letters and numbers")
     @Size(min = 4, max = 16, message = "Login length must be in range from 4 to 16")
     private String login;
+<<<<<<< HEAD
 
     @Size(min = 4, max = 16, message = "Password length must be in range from 4 to 16")
     private String password;
 
+=======
+    
+    @Size(min = 4, max = 16, message = "Password length must be in range from 4 to 16")
+    private String password;
+    
+>>>>>>> 1681fdae748a980611fd8b7fe5e51cde39d89517
     @Pattern(regexp = "^.+@.+$", message = "Email should match pattern: user@domain")
     private String email;
 
@@ -60,6 +72,7 @@ public class RegistrationBean {
     public void setEmail(String email) {
         this.email = email;
     }
+<<<<<<< HEAD
 
     public String register() {
         if (dbConnector.registerUser()) {
@@ -71,5 +84,9 @@ public class RegistrationBean {
                         "User with this login already exists",
                         "Please choose another login"));
         return Navigator.toRegister();
+=======
+    public String register(){
+        return "index";
+>>>>>>> 1681fdae748a980611fd8b7fe5e51cde39d89517
     }
 }
