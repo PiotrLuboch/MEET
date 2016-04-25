@@ -6,27 +6,20 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui">
 
+    <ui:composition template="./resources/templates/mainPageTemplate.xhtml">
+        <ui:define name="title">Main page</ui:define>
+        <ui:define name="content">
+            <b:container>
+                <p:growl id="indexMessages" life="5000" autoUpdate="true" showDetail="true" escape="false"/>
+                <b:jumbotron>
+                    <h:graphicImage style="width: 100%; max-width: 469px;" library="images" name="MeetBig.png"/>
+                    <h1/>
+                    <h2>Meet eveyone, every time - it's as simple as that!</h2>
+                    <p></p>
+                </b:jumbotron>
+            </b:container>
+        </ui:define>
+    </ui:composition>
 
-    <h:body>
 
-        <ui:composition template="./resources/templates/mainPageTemplate.xhtml">
-            <ui:define name="title">Main page</ui:define>
-
-            <ui:define name="content">
-
-                
-                <b:container>
-                    <p:growl id="indexMessages" life="5000" autoUpdate="true" showDetail="true" escape="false"/>
-                    <b:jumbotron>
-                        <h:graphicImage style="width: 100%; max-width: 469px;" library="images" name="MeetBig.png"/>
-                        <h1/>
-                        <h2>Meet eveyone, every time - it's as simple as that!</h2>
-                        <p></p>
-                    </b:jumbotron>
-                </b:container>
-            </ui:define>
-
-        </ui:composition>
-
-    </h:body>
 </html>

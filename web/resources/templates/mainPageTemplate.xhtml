@@ -17,16 +17,16 @@
             <b:navBar id="mainmenu" brand="" brandHref="/MEET/faces/index.xhtml" brandImg="/MEET/resources/images/Meet.png" fixed="true">
                 <b:column  medium-screen="4" style="padding-top: 7px; align-items: center; justify-content: center;">
                     <b:navbarLinks>
-                        <b:inputText id="search">
+                        <b:inputText id="search" value="#{serviceFacadeBean.searchEventName}">
                             <f:facet name="append">
-                                <b:button value="" icon="search"/>
+                                <b:commandButton value="" icon="search" action="searchResult"/>
                             </f:facet>
                         </b:inputText>
                         <p:watermark for="search" value="Search events..."/>
                     </b:navbarLinks> 
                 </b:column>
                 <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
-
+                <b:navbarLinks><b:commandButton value="Events" action="searchResult"/></b:navbarLinks>
                 <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
                 <b:navbarLinks pull="right" rendered="#{!loginBean.isLoggedIn}">
                     <b:navLink value="Log in" href="/MEET/faces/login.xhtml" icon="glyphicon-user"/>
@@ -35,9 +35,13 @@
 
                 </b:navbarLinks>
                 <b:navbarLinks pull="right" rendered="#{loginBean.isLoggedIn}">
-                    <b:dropMenu value="#{loginBean.username}" icon="user" >                        
-                        <b:navLink value="Account" href="/MEET/faces/account.xhtml"/>
-                        <b:navLink value="Event management" href="/MEET/faces/userEvents.xhtml"/>
+                    <b:dropMenu value="#{loginBean.username}" icon="user" >
+                        <b:navLink value="Account" icon="list-alt" href="/MEET/faces/account.xhtml"/>
+                        <b:navLink value="Profile" icon="link" href="/MEET/faces/profile.xhtml"/>
+                        <b:navLink value="Notifications" icon="tags" href="/MEET/faces/notifications.xhtml"/>
+                        <b:navLink/>
+                        <b:navLink value="Event management" href="/MEET/faces/userEvents.xhtml" icon="calendar"/>
+                        <b:navLink value="Add event" href="/MEET/faces/addEvent.xhtml" icon="plus"/>
                         <b:navLink/>
                         <b:navLink value="Log out" href="/MEET/faces/index.xhtml" icon="glyphicon-lock" action="#{loginBean.logout}" onclick="document.getElementById('myForm:hiddenButton').click()"/>
                     </b:dropMenu>
