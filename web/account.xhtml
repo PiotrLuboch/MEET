@@ -18,7 +18,7 @@
                             <h:outputText value="Name:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <b:inputText />
+                            <b:inputText value="#{userBean.user.name}"/>
                         </b:column>
                     </b:row>
                     <b:row>
@@ -26,7 +26,7 @@
                             <h:outputText value="Surname:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <b:inputText />
+                            <b:inputText value="#{userBean.user.surname}"/>
                         </b:column>
                     </b:row>
                     <b:row>
@@ -34,7 +34,7 @@
                             <h:outputText value="Date of birth:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <b:datepicker showButtonPanel="true" changeMonth="true" changeYear="true"/>
+                            <b:datepicker showButtonPanel="true" changeMonth="true" changeYear="true" value="#{userBean.user.birthday}"/>
                         </b:column>
                     </b:row>
                     <b:row>

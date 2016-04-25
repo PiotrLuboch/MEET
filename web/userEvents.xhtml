@@ -19,6 +19,12 @@
                         </f:facet>
                         <h:outputText value="#{event.name}"/>
                     </h:column>
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Number of participants"/>
+                        </f:facet>
+                        <h:outputText value="#{event.userList.size()}"/>
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Capacity"/>

@@ -62,6 +62,11 @@ public class RegistrationBean {
 
     public String register() {
         if (dbConnector.registerUser()) {
+            FacesContext.getCurrentInstance().addMessage(
+                null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "User succesfully registered",
+                        "Your account have been succesfully created!"));
             return Navigator.toIndex();
         }
         FacesContext.getCurrentInstance().addMessage(

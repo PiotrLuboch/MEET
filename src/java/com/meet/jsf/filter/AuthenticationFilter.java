@@ -6,8 +6,6 @@
 package com.meet.jsf.filter;
 
 import java.io.IOException;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -43,6 +41,4 @@ public class AuthenticationFilter implements Filter {
     public void destroy() {
         this.config = null;
     }
-
-    // You also have to implement init() and destroy() methods.
 }

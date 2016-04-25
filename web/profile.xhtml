@@ -18,9 +18,7 @@
                             <h:outputText value="Username:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <p:inplace editor="true">
-                                <p:inputText value="#{loginBean.username}" disabled="false"/>
-                            </p:inplace>
+                            <b:inputText value="#{userBean.user.login}" disabled="true"/>
                         </b:column>
                     </b:row>
                     <b:row>
@@ -28,7 +26,7 @@
                             <h:outputText value="Password:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <b:inputText />
+                            <b:inputSecret value="#{userBean.user.password}" />
                         </b:column>
                     </b:row>
                     <b:row>
@@ -36,7 +34,7 @@
                             <h:outputText value="Email:"/>
                         </b:column>
                         <b:column medium-screen="3">
-                            <b:inputText/>
+                            <b:inputText value="#{userBean.user.email}"/>
                         </b:column>
                     </b:row>
                     <b:row>
@@ -45,7 +43,7 @@
                     <b:row>
                         <b:column medium-screen="2"/>
                         <b:column medium-screen="3">
-                            <b:commandButton value="Submit changes" icon="ok" action="account"/>                             
+                            <b:commandButton value="Submit changes" icon="ok" action="profile"/>                             
                         </b:column>
                     </b:row>
                 </b:panel>

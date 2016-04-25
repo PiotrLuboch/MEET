@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
  *
  * @author Piotr
  */
+
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {

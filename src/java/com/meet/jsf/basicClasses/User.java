@@ -6,6 +6,7 @@
 package com.meet.jsf.basicClasses;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -18,7 +19,15 @@ public class User {
     private String email;
     private String name;
     private String surname;
+    private Date birthday;
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
     private ArrayList<Event> events = new ArrayList<>();
 
     public ArrayList<Event> getEvents() {

@@ -31,6 +31,7 @@ public class Event {
 
     public Event(String name, User organiser, int capacity) {
         this();
+        
         this.organiser = organiser;
         this.name = name;
         this.capacity = capacity;
@@ -112,5 +113,13 @@ public class Event {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(ArrayList<User> userList) {
+        this.userList = userList;
     }
 }

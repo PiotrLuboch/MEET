@@ -20,6 +20,12 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
+                            <h:outputText value="Number of participants"/>
+                        </f:facet>
+                        <h:outputText value="#{event.userList.size()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
                             <h:outputText value="Capacity"/>
                         </f:facet>
                         <h:outputText value="#{event.capacity}"/>
@@ -53,8 +59,8 @@
                                 <h:outputText value="#{event.comment}"/>
                             </h:panelGrid>
                             <f:facet name="footer">
-                                <b:button value="close" dismiss="modal" onclick="return false;"/>
-                                <b:commandButton value="Ok" look="primary" action="#{userBean.joinEvent(event)}" />
+                                <b:button value="close" dismiss="modal" onclick="return false;" size="mini"/>
+                                <p:commandButton value="Ok" action="#{userBean.joinEvent(event)}" ajax="false" />
                             </f:facet>
                         </b:modal>                        
                     </h:column>                    
