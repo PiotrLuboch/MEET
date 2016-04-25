@@ -3,6 +3,22 @@
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
+    </context-param>    
+    <context-param>
+        <param-name>BootsFaces_THEME</param-name>
+        <param-value>default</param-value>
+    </context-param>
+    <context-param>
+        <param-name>BootsFaces_USETHEME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -14,11 +30,17 @@
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>10</session-timeout>
     </session-config>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.meet.jsf.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/faces/account.xhtml</url-pattern>
+    </filter-mapping>
 </web-app>

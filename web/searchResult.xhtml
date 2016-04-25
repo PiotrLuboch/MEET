@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <ui:composition template="./resources/templates/mainPageTemplate.xhtml">
+        <ui:define name="title">Search results</ui:define>
+        <ui:define name="content">
+            <b:container>
+                <b:dataTable value="#{mockDbConnector.getEventDb()}" var="event">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Event name"/>
+                        </f:facet>
+                        <h:outputText value="#{event.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Capacity"/>
+                        </f:facet>
+                        <h:outputText value="#{event.capacity}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date"/>
+                        </f:facet>
+                        <h:outputText value="#{event.date}">
+                            <f:convertDateTime pattern="yyyy/MM/dd HH:mm"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Comment"/>
+                        </f:facet>
+                        <h:outputText value="#{event.comment}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Join!" rendered="#{loginBean.isLoggedIn}" onclick="$('.modalPseudoClass#{event.id}').modal();return false;"/>
+                        <h:commandLink value="Log in to join" rendered="#{!loginBean.isLoggedIn}" action="login"/>
+                        <b:modal id="amodal" title="Join event" styleClass="modalPseudoClass#{event.id}" >
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Event name: "/>
+                                <h:outputText value="#{event.name}"/>
+                                <h:outputText value="Capacity: "/>
+                                <h:outputText value="#{event.capacity}"/>
+                                <h:outputText value="Date: "/>
+                                <h:outputText value="#{event.date}"/>
+                                <h:outputText value="Comments: "/>
+                                <h:outputText value="#{event.comment}"/>
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <b:button value="close" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton value="Ok" look="primary" action="#{userBean.joinEvent(event)}" />
+                            </f:facet>
+                        </b:modal>                        
+                    </h:column>                    
+                </b:dataTable>
+
+            </b:container>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

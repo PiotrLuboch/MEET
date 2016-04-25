@@ -5,18 +5,37 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <body>
-
+    <h:body>
         <ui:composition template="./resources/templates/mainPageTemplate.xhtml">
-
+            <ui:define name="title">Register</ui:define>
             <ui:define name="content">
-                <p:panel header="Insert registration data">
-                    <h:panelGrid columns="2">
-                    </h:panelGrid>
-                </p:panel>
+                <p:growl id="growl" life="5000" autoUpdate="true" showDetail="true" escape="false"/>
+
+                <h:form>
+                    <p:dialog id="dialog" header="Register" width="500" widgetVar="dlg" visible="true" closable="false" draggable="false" resizable="false" style="box-shadow: 7px 10px 5px #303030;" > 
+                        <p:messages autoUpdate="true" globalOnly="true"/>
+                        <h:panelGrid id="registrationGrid" columns="4" cellspacing="5">
+                            <h:outputLabel for="login" value="Login"/>
+                            <p:spacer width="10"/>
+                            <p:inputText id="login" value="#{registrationBean.login}" label="Login"/>
+                            <p:message for="login" />
+                            
+                            <h:outputLabel for="email" value="Email" />
+                            <p:spacer width="10"/>
+                            <p:inputText id="email" value="#{registrationBean.email}" label="Email"/>
+                            <p:message for="email"/>
+                            
+                            <h:outputLabel for="password" value="Password"/>
+                            <p:spacer width="10"/>
+                            <p:password id="password" value="#{registrationBean.password}" feedback="true"/>
+                            <p:message for="password"/>                          
+                        </h:panelGrid>
+                        <p:commandButton value="Register" update="registrationGrid" icon="ui-icon-check" validateClient="true" action="#{registrationBean.register()}"/>
+                    </p:dialog>
+                </h:form>
             </ui:define>
 
         </ui:composition>
 
-    </body>
+    </h:body>
 </html>
