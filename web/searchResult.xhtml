@@ -11,7 +11,7 @@
         <ui:define name="title">Search results</ui:define>
         <ui:define name="content">
             <b:container>
-                <b:dataTable value="#{serviceFacadeBean.findEvents()}" var="event">
+                <b:dataTable value="#{mockDbConnector.getEventDb()}" var="event">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Event name"/>
@@ -39,11 +39,29 @@
                         <h:outputText value="#{event.comment}"/>
                     </h:column>
                     <h:column>
-                        <h:commandLink value="Join event" rendered="#{loginBean.isLoggedIn}"/>
+                        <h:commandLink value="Join!" rendered="#{loginBean.isLoggedIn}" onclick="$('.modalPseudoClass#{event.id}').modal();return false;"/>
                         <h:commandLink value="Log in to join" rendered="#{!loginBean.isLoggedIn}" action="login"/>
-                    </h:column>
+                        <b:modal id="amodal" title="Join event" styleClass="modalPseudoClass#{event.id}" >
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Event name: "/>
+                                <h:outputText value="#{event.name}"/>
+                                <h:outputText value="Capacity: "/>
+                                <h:outputText value="#{event.capacity}"/>
+                                <h:outputText value="Date: "/>
+                                <h:outputText value="#{event.date}"/>
+                                <h:outputText value="Comments: "/>
+                                <h:outputText value="#{event.comment}"/>
+                            </h:panelGrid>
+                            <f:facet name="footer">
+                                <b:button value="close" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton value="Ok" look="primary" action="#{userBean.joinEvent(event)}" />
+                            </f:facet>
+                        </b:modal>                        
+                    </h:column>                    
                 </b:dataTable>
+
             </b:container>
+
         </ui:define>
     </ui:composition>
 </html>

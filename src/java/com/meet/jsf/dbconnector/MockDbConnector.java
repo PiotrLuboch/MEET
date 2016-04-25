@@ -9,10 +9,8 @@ import com.meet.jsf.basicClasses.Event;
 import com.meet.jsf.basicClasses.User;
 import com.meet.jsf.managedbeans.LoginBean;
 import com.meet.jsf.managedbeans.RegistrationBean;
-import com.meet.jsf.managedbeans.ServiceFacadeBean;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +31,22 @@ public class MockDbConnector implements IDbConnector {
     
     private static ArrayList<User> userDb = new ArrayList<>();
     private static ArrayList<Event> eventDb = new ArrayList<>();
+
+    public static ArrayList<User> getUserDb() {
+        return userDb;
+    }
+
+    public static void setUserDb(ArrayList<User> userDb) {
+        MockDbConnector.userDb = userDb;
+    }
+
+    public static ArrayList<Event> getEventDb() {
+        return eventDb;
+    }
+
+    public static void setEventDb(ArrayList<Event> eventDb) {
+        MockDbConnector.eventDb = eventDb;
+    }
 
     public MockDbConnector() {
         if (userDb.isEmpty()) {
@@ -78,24 +92,11 @@ public class MockDbConnector implements IDbConnector {
         }
         userDb.add(user);
         return true;
-    }
-
-    public ArrayList<Event> findEvents(String name) {
-        if (name.equals("")) {
-            return eventDb;
-        }
-        ArrayList<Event> events = new ArrayList<>();
-        Event event = new Event(name, null, 0);
-        for(Event e: eventDb){
-            if(e.equals(event))
-                events.add(e);
-        }
-        return events;
-    }
+    }    
     
     public boolean addEvent(Event event){
         if(event == null)
-            return false;
+            return false;  
         if(eventDb.contains(event))
             return false;
         eventDb.add(event);        
@@ -108,4 +109,10 @@ public class MockDbConnector implements IDbConnector {
         return userDb.get(index);
     }
 
+    
+    public static void main(String[] argv){
+        MockDbConnector db = new MockDbConnector();
+        User u = db.getUser("admin");
+        System.out.print(u.getLogin());
+    }
 }

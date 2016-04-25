@@ -20,8 +20,11 @@ import javax.inject.Named;
 @ApplicationScoped
 public class ServiceFacadeBean {
 
-    private String searchEventName;
-
+    @Inject
+    private MockDbConnector mockDbConnector;
+    @Inject
+    private UserBean userBean;
+    
     private Event event = new Event();
 
     public Event getEvent() {
@@ -32,24 +35,10 @@ public class ServiceFacadeBean {
         this.event = event;
     }
 
-    @Inject
-    private MockDbConnector mockDbConnector;
-
-    public String getSearchEventName() {
-        return searchEventName;
-    }
-
-    public void setSearchEventName(String searchEventName) {
-        this.searchEventName = searchEventName;
-    }
-
     public String addEvent() {
         mockDbConnector.addEvent(event);
+        userBean.joinEvent(event);
         event = new Event();
         return "index";
-    }
-
-    public ArrayList<Event> findEvents() {
-        return mockDbConnector.findEvents(searchEventName);
     }
 }

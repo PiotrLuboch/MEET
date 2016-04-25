@@ -5,6 +5,7 @@
  */
 package com.meet.jsf.managedbeans;
 
+import com.meet.jsf.basicClasses.Event;
 import com.meet.jsf.basicClasses.User;
 import com.meet.jsf.dbconnector.MockDbConnector;
 import java.io.Serializable;
@@ -19,22 +20,36 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class UserBean implements Serializable {
+    
     private User user;
-
+    
     @Inject
     private LoginBean loginBean;
+    
     @Inject
     private MockDbConnector mockDbConnector;
     
-    public UserBean(){
-        user = mockDbConnector.getUser(loginBean.getUsername());
-    }
     public User getUser() {
+        if(user==null)
+            user = mockDbConnector.getUser(loginBean.getUsername());
         return user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
     
+    public void joinEvent(Event event) {
+        user = mockDbConnector.getUser(loginBean.getUsername());
+        if (event != null && user != null && !user.getEvents().contains(event)) {
+            user.getEvents().add(event);
+            event.addUser(user);
+        }
+    }
+    
+    public static void main(String[] argv) {
+        UserBean ub = new UserBean();
+        User u = ub.mockDbConnector.getUser("admin");
+        System.out.println(u.getName());
+    }
 }

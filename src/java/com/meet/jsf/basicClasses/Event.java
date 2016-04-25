@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public class Event {
 
+    private static int currentId;
+    private int id;
     private String name;
     private int capacity;
     private User organiser;
@@ -23,9 +25,12 @@ public class Event {
     private ArrayList<User> userList = new ArrayList<>();
 
     public Event() {
+        id=currentId;
+        ++currentId;
     }
 
     public Event(String name, User organiser, int capacity) {
+        this();
         this.organiser = organiser;
         this.name = name;
         this.capacity = capacity;
@@ -99,5 +104,13 @@ public class Event {
     @Override
     public String toString() {
         return name + " " + capacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
