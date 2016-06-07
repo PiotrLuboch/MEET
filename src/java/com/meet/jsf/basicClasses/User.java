@@ -20,7 +20,8 @@ public class User {
     private String name;
     private String surname;
     private Date birthday;
-
+    private ArrayList<Event> events = new ArrayList<>();
+    
     public Date getBirthday() {
         return birthday;
     }
@@ -28,7 +29,6 @@ public class User {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-    private ArrayList<Event> events = new ArrayList<>();
 
     public ArrayList<Event> getEvents() {
         return events;
@@ -98,5 +98,7 @@ public class User {
         this.surname = surname;
     }
 
-    
+    public void exportToICal(){
+        
+    }
 }

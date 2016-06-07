@@ -59,7 +59,7 @@
                                 <h:outputText value="#{event.comment}"/>
                             </h:panelGrid>
                             <f:facet name="footer">
-                                <b:button value="close" dismiss="modal" onclick="return false;" size="mini"/>
+                                <p:button value="close" onclick="return false;"/>
                                 <p:commandButton value="Ok" action="#{userBean.joinEvent(event)}" ajax="false" />
                             </f:facet>
                         </b:modal>                        
